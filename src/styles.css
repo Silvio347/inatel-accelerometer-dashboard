@@ -1,0 +1,439 @@
+:root {
+  --bg: #0f1419;
+  --panel: #182029;
+  --border: #2a3644;
+  --text: #e6edf3;
+  --muted: #8b98a5;
+  --on: #3fb950;
+  --off: #3a4552;
+  --warn: #d29922;
+  --danger: #f85149;
+  --accent: #58a6ff;
+  --zone-a: #3fb950;
+  --zone-b: #a5d63f;
+  --zone-c: #d29922;
+  --zone-d: #f85149;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+h3 {
+  font-size: 0.9rem;
+  margin: 0.5rem 0 0.25rem;
+}
+
+code {
+  background: var(--bg);
+  padding: 0 0.3em;
+  border-radius: 4px;
+}
+
+.app {
+  padding: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.app-header p {
+  margin: 0.2rem 0 0;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.panel-head h2 {
+  margin: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+  align-items: start;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main-col,
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 0.75rem;
+  margin: 0.4rem 0 0;
+}
+
+.error {
+  color: var(--danger);
+  margin: 0;
+}
+
+.banner {
+  margin: 0;
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.banner-error {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* Connect form */
+.connect {
+  max-width: 460px;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.connect label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+input,
+select {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem;
+  font: inherit;
+}
+
+select {
+  width: 100%;
+}
+
+button {
+  background: var(--accent);
+  color: #0b0f14;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.segmented {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.segmented button {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+/* Status bar */
+.status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.pill {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+}
+
+.pill-connected,
+.pill-source-online {
+  border-color: var(--on);
+  color: var(--on);
+}
+
+.pill-connecting,
+.pill-reconnecting,
+.pill-demo,
+.pill-stale,
+.pill-source-simulated {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+.pill-source-offline,
+.pill-error {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* Vibration cards */
+.axis-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (max-width: 560px) {
+  .axis-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.axis-card {
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--off);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.axis-card.zone-A {
+  border-left-color: var(--zone-a);
+}
+
+.axis-card.zone-B {
+  border-left-color: var(--zone-b);
+}
+
+.axis-card.zone-C {
+  border-left-color: var(--zone-c);
+}
+
+.axis-card.zone-D {
+  border-left-color: var(--zone-d);
+}
+
+.axis-name {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.big {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 0.2rem;
+}
+
+.sub {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0.6rem;
+}
+
+.unit {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.axis-card .small {
+  margin: 0;
+}
+
+.zone-line {
+  margin: 0.75rem 0 0;
+  font-weight: 600;
+}
+
+.zone-text-A {
+  color: var(--zone-a);
+}
+
+.zone-text-B {
+  color: var(--zone-b);
+}
+
+.zone-text-C {
+  color: var(--zone-c);
+}
+
+.zone-text-D {
+  color: var(--zone-d);
+}
+
+/* Readings list */
+.readings {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.readings dt {
+  color: var(--muted);
+}
+
+.readings dd {
+  margin: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+/* Bits */
+.bits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.led {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  margin-right: 0.3rem;
+  vertical-align: -1px;
+}
+
+.led-on {
+  background: var(--on);
+  box-shadow: 0 0 6px var(--on);
+}
+
+.led-alarm {
+  background: var(--danger);
+  box-shadow: 0 0 6px var(--danger);
+}
+
+.led-off {
+  background: var(--off);
+}
+
+.led-unknown {
+  background: transparent;
+  border: 1px dashed var(--muted);
+}
+
+/* Charts */
+.chart {
+  margin: 0 0 0.75rem;
+}
+
+.chart figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.legend {
+  display: flex;
+  gap: 0.75rem;
+  color: var(--muted);
+}
+
+.legend i {
+  display: inline-block;
+  width: 0.8rem;
+  height: 3px;
+  vertical-align: middle;
+}
+
+.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #121a22;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.chart-grid {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.chart-tick {
+  fill: var(--muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-guide {
+  stroke: var(--warn);
+  stroke-dasharray: 4 4;
+  opacity: 0.7;
+}
+
+.chart-guide-label {
+  fill: var(--warn);
+  font-size: 10px;
+}
+
+.chart-empty {
+  fill: var(--muted);
+  font-size: 13px;
+}
