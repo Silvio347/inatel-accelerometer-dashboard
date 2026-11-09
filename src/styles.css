@@ -422,15 +422,119 @@ button.secondary {
   font-variant-numeric: tabular-nums;
 }
 
-.chart-guide {
-  stroke: var(--warn);
-  stroke-dasharray: 4 4;
+.chart-box {
+  position: relative;
+}
+
+.chart-svg {
+  cursor: crosshair;
+  touch-action: pan-y;
+}
+
+.chart-band {
+  opacity: 0.09;
+}
+
+.band-A {
+  fill: var(--zone-a);
+}
+
+.band-B {
+  fill: var(--zone-b);
+}
+
+.band-C {
+  fill: var(--zone-c);
+}
+
+.band-D {
+  fill: var(--zone-d);
+}
+
+.chart-limit {
+  stroke: var(--muted);
+  stroke-dasharray: 3 4;
+  opacity: 0.6;
+}
+
+.chart-zone {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.chart-zone.zone-text-A {
+  fill: var(--zone-a);
+}
+
+.chart-zone.zone-text-B {
+  fill: var(--zone-b);
+}
+
+.chart-zone.zone-text-C {
+  fill: var(--zone-c);
+}
+
+.chart-zone.zone-text-D {
+  fill: var(--zone-d);
+}
+
+.chart-cursor {
+  stroke: var(--text);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
   opacity: 0.7;
 }
 
-.chart-guide-label {
-  fill: var(--warn);
-  font-size: 10px;
+.chart-cursor.is-pinned {
+  stroke: var(--accent);
+  stroke-dasharray: none;
+  opacity: 1;
+}
+
+.chart-tip {
+  position: absolute;
+  top: 6px;
+  pointer-events: none;
+  background: rgba(15, 20, 25, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.chart-tip-time {
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+.chart-tip-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.chart-tip-row i {
+  display: inline-block;
+  width: 0.7rem;
+  height: 3px;
+}
+
+.chart-tip-row b {
+  min-width: 3.2rem;
+  text-align: right;
+}
+
+button.link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: inherit;
+  text-decoration: underline;
 }
 
 .chart-empty {
