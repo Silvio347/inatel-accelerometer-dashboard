@@ -1,0 +1,16 @@
+node_modules
+dist
+.env
+.env.local
+.env.*.local
+.netlify
+*.log
+
+# Bridge kit for the lab PC (contains the broker host and, if set, the password)
+bridge/dist/
+__pycache__/
+
+# Vendor files that are not ours to redistribute (IODD, GSDML, TIA projects)
+*.ap1[5-9]
+*.zap1[5-9]
+vendor/
