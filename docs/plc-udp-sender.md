@@ -25,7 +25,7 @@ variable `Packet` of type Struct:
 | PQI | Byte | 4.0 | `"CMSW_PQI"` |
 | Flags1 | Byte | 5.0 | `"CMSW_Flags1"` (%IB218, alarm bits 15–8) |
 | Flags2 | Byte | 6.0 | `"CMSW_Flags2"` (%IB219, alarm bits 7–0) |
-| Version | Byte | 7.0 | constant **1** (the bridge drops packets with another value) |
+| Version | Byte | 7.0 | constant **1**. The bridge also accepts 0 (the first PLC program left this byte reserved); other values are dropped |
 | VelX | Real | 8.0 | `"DB_CMSW".Motor1.VelRMS_X_mms` |
 | VelY | Real | 12.0 | `...VelRMS_Y_mms` |
 | VelZ | Real | 16.0 | `...VelRMS_Z_mms` |
