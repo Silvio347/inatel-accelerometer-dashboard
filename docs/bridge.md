@@ -57,6 +57,16 @@ Unzip anywhere (Desktop, Documents or a USB drive) and run, in order:
 HiveMQ Cloud has no plain (non-TLS) port, so the bridge always uses TLS.
 `MQTT_TLS=0` exists only for a local test broker.
 
+## PLC sending to port 5005
+
+The first PLC program (written before this repository) sends to UDP 5005
+instead of 5010. Either change `REM_PORT_NR` to 5010 in `FB_UdpSender`, or
+set `UDP_PORT=5005` in `config.bat`. With 5005, the robot cell twin bridge
+cannot run on the same PC at the same time.
+
+Do not use the early `ponte_udp_mqtt.py` script: it publishes to
+`lab/cmsw/motor1` with another JSON format, which the website does not read.
+
 ## Windows Firewall
 
 Windows blocks incoming UDP unless a rule allows it, and adding a rule needs
@@ -91,4 +101,4 @@ The bridge asks for the password, or reads `MQTT_PASSWORD`.
 | `[WinError 10048]` / address in use | Another program on UDP 5010 | Close it, or change `UDP_PORT` here and `REM_PORT_NR` on the PLC |
 | Connected but never `online` | No packets arrive | PLC `connected`/`Counter` (see [plc-udp-sender.md](plc-udp-sender.md#checking-it-on-the-plc)), destination IP in `FB_UdpSender`, `PUNCH` |
 | `Ignoring packet from ...` | Packets from another IP than `PLC_IP` | Fix `PLC_IP` |
-| `Ignoring malformed packet` | Not 44 bytes, or version byte ≠ 1 | DB optimized, `LEN` ≠ 44, `Version` not set, or field order wrong |
+| `Ignoring malformed packet` | Not 44 bytes, or version byte not 0 or 1 | DB optimized, `LEN` ≠ 44, or field order wrong |

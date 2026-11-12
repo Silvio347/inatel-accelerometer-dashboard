@@ -63,7 +63,7 @@ WEG CMSW-IOL ─M12─ ifm AL1306 port X01 ─PROFINET─ S7-1200
 - Acceleration offsets: IODD says RMS in the ID and peak-to-peak in the text
   [to check].
 - PLC → bridge: `DB_UdpTx` **not optimized**, 44 bytes: UDInt counter, Byte
-  PQI, Byte flags1, Byte flags2, Byte version = 1, nine Reals. `TCON` UDP
+  PQI, Byte flags1, Byte flags2, Byte version = 1 (0 also accepted), nine Reals. `TCON` UDP
   local port 2000, `TUSEND` to the lab PC IP, port **5010**, `LEN := 44`.
   The SCL block was not compiled yet [to check].
 - Port 5010, not 5005: the robot cell twin bridge (another project) uses 5005
@@ -97,6 +97,14 @@ WEG CMSW-IOL ─M12─ ifm AL1306 port X01 ─PROFINET─ S7-1200
    valid".
 5. Website: connect, **Bridge: online**, values move when the sensor is
    tapped or the motor runs.
+
+## Early script and port 5005 [confirmed in the lab]
+
+The PLC in the lab was programmed from an early version of the guide: it
+sends to **UDP 5005** with byte 7 = 0, and it works (PQI 16#B0, counter going
+up). The early script `ponte_udp_mqtt.py` published to `lab/cmsw/motor1`,
+which the website does not read. **Use `5-run-bridge.bat` from this kit**, with
+`UDP_PORT=5005` in `config.bat` (or change `REM_PORT_NR` to 5010 on the PLC).
 
 ## No packets from the PLC
 

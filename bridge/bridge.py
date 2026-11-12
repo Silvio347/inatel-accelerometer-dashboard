@@ -36,10 +36,13 @@ import uuid
 
 # Big-endian, same as the S7 DB "DB_UdpTx" (not optimized):
 #   0 UDInt counter | 4 Byte PQI | 5 Byte sensor byte 18 | 6 Byte sensor byte 19
-#   7 Byte layout version (1) | 8..43 nine Real values
+#   7 Byte layout version | 8..43 nine Real values
 PACKET_FORMAT = ">IBBBB9f"
 PACKET_LEN = struct.calcsize(PACKET_FORMAT)  # 44
 LAYOUT_VERSION = 1
+# Version 0: the first PLC program left byte 7 as a reserved 0; the rest of the
+# layout is the same, so those packets are accepted too.
+ACCEPTED_VERSIONS = (0, LAYOUT_VERSION)
 
 # The PLC sends from this local UDP port (LocalPort of the TCON connection).
 PLC_LOCAL_PORT = 2000
@@ -59,7 +62,7 @@ def parse_packet(data: bytes) -> dict | None:
     if len(data) != PACKET_LEN:
         return None
     seq, pqi, flags_hi, flags_lo, version, *reals = struct.unpack(PACKET_FORMAT, data)
-    if version != LAYOUT_VERSION:
+    if version not in ACCEPTED_VERSIONS:
         return None
     vx, vy, vz, ax, ay, az, temp, press, hum = reals
     return {
@@ -373,8 +376,9 @@ class Bridge:
         packet = parse_packet(data)
         if packet is None:
             self.stats["dropped"] += 1
-            log.warning("Ignoring malformed packet (%d bytes, expected %d with version byte %d) from %s",
-                        len(data), PACKET_LEN, LAYOUT_VERSION, sender)
+            version = data[7] if len(data) > 7 else None
+            log.warning("Ignoring malformed packet from %s: %d bytes (expected %d), version byte %s (expected 0 or %d)",
+                        sender, len(data), PACKET_LEN, version, LAYOUT_VERSION)
             return
         seq = packet["seq"]
         if seq == self.last_seq:
